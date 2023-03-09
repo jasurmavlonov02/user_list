@@ -44,3 +44,7 @@ class LoginPage(LoginMixin, LoginView):
 def logout_page(request):
     logout(request)
     return render(request, 'auth/logout.html')
+
+
+
+#jasur
