@@ -1,0 +1,29 @@
+
+.a1 {
+    height: 39.01px;
+    list-style: none;
+    background-color: #2c7be5;
+    display: inline-block;
+    border-radius: 50rem;
+    margin-left: 40px;
+}
+
+
+.a1 a {
+    color: white !important;
+}
+
+.d1:hover {
+    color: white !important;
+}
+
+.dropdown-menu {
+    width: auto;
+    height: auto;
+    box-shadow: 0 0 5px 1px rgb(214, 215, 216);
+    transition: 0.2s;
+}
+
+.dropdown-menu a {
+    color: black !important;
+}

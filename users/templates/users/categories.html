@@ -1,0 +1,10 @@
+{% if category_users %}
+<h1>{{ cats }}</h1>
+{% for item in category_users %}
+    {{ item.category }} - {{ item.username }} - {{ item.email }}<br>
+{% endfor %}
+
+
+{% else %}
+    <h2>Sorry this page does not exist...</h2>
+{% endif %}
