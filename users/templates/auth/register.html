@@ -11,7 +11,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>User List | Web Template</title>
+    <title>Falcon | Dashboard &amp; Web App Template</title>
 
 
     <!-- ===============================================-->
@@ -74,73 +74,63 @@
         </script>
         <div class="row flex-center min-vh-100 py-6">
             <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4"><a class="d-flex flex-center mb-4"
-                                                                           href="{% url 'login_page' %}"><img
+                                                                           href="{% url 'register_page' %}"><img
                     class="me-2" src="{% static "users/assets/img/icons/spot-illustrations/falcon.png" %}" alt=""
-                    width="58"/><span class="font-sans-serif fw-bolder fs-5 d-inline-block">Login</span></a>
+                    width="58"/><span class="font-sans-serif fw-bolder fs-5 d-inline-block">Register</span></a>
                 <div class="card">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                {{ message }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-
                     <div class="card-body p-4 p-sm-5" style="color: red">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
 
                         {% if form.errors %}
                             <p>{{ form.errors }}</p>
                         {% endif %}
                         <div class="row flex-between-center mb-2">
-
                             <div class="col-auto">
-                                <h5>Log in</h5>
+                                <h5>Register</h5>
                             </div>
-                            <div class="col-auto fs--1 text-600"><span class="mb-0 undefined">or</span> <span><a
-                                    href="{% url 'register_page' %}">Create an account</a></span>
-                            </div>
+                            <div class="col-auto fs--1 text-600"><span class="mb-0 undefined">Have an account?</span>
+                                <span><a href="{% url 'login_page' %}">Login</a></span></div>
                         </div>
-                        <form method="POST" action="{% url 'login_page' %}">
+                        <form action="{% url 'register_page' %}" method="post">
                             {% csrf_token %}
                             <div class="mb-3">
-                                <input class="form-control" type="text" name="username" placeholder="Username "/>
+                                <input class="form-control" type="text" name="username" autocomplete="on"
+                                       placeholder="Username"/>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" type="password" name="password" placeholder="Password"/>
+                                <input class="form-control" type="email" name="email" autocomplete="on"
+                                       placeholder="Email address"/>
                             </div>
-                            <div class="row flex-between-center">
-                                <div class="col-auto">
-                                    <div class="form-check mb-0">
-                                        <input class="form-check-input" type="checkbox" id="basic-checkbox"
-                                               checked="checked"/>
-                                        <label class="form-check-label mb-0" for="basic-checkbox">Remember me</label>
-                                    </div>
+                            <div class="row gx-2">
+                                <div class="mb-3 col-sm-6">
+                                    <input class="form-control" type="password" name="password" autocomplete="on"
+                                           placeholder="Password"/>
                                 </div>
-{#                                <div class="col-auto"><a class="fs--1"#}
-{#                                                         href="../../../pages/authentication/simple/forgot-password.html">Forgot#}
-{#                                    Password?</a></div>#}
+                                <div class="mb-3 col-sm-6">
+                                    <input class="form-control" type="password" name="confirm_password"
+                                           autocomplete="on" placeholder="Confirm Password"/>
+                                </div>
                             </div>
+                            {#                  <div class="form-check">#}
+                            {#                    <input class="form-check-input" type="checkbox" id="basic-register-checkbox" />#}
+                            {#                    <label class="form-label" for="basic-register-checkbox">I accept the <a href="#!">terms </a>and <a href="#!">privacy policy</a></label>#}
+                            {#                  </div>#}
                             <div class="mb-3">
-                                <button class="btn btn-primary d-block w-100 mt-3" type="submit">Log in
-                                </button>
+                                <button class="btn btn-primary d-block w-100 mt-3" type="submit">Register</button>
                             </div>
                         </form>
-                        <div class="position-relative mt-4">
-                            <hr class="bg-300"/>
-                            <div class="divider-content-center">or log in with</div>
-                        </div>
-                        <div class="row g-2 mt-2">
-                            <div class="col-sm-6"><a class="btn btn-outline-google-plus btn-sm d-block w-100"
-                                                     href="#"><span class="fab fa-google-plus-g me-2"
-                                                                    data-fa-transform="grow-8"></span> google</a></div>
-                            <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100"
-                                                     href="#"><span class="fab fa-facebook-square me-2"
-                                                                    data-fa-transform="grow-8"></span> facebook</a>
-                            </div>
-                        </div>
+                        {#                <div class="position-relative mt-4">#}
+                        {#                  <hr class="bg-300" />#}
+                        {#                  <div class="divider-content-center">or register with</div>#}
+                        {#                </div>#}
+                        {#                <div class="row g-2 mt-2">#}
+                        {#                  <div class="col-sm-6"><a class="btn btn-outline-google-plus btn-sm d-block w-100" href="#"><span class="fab fa-google-plus-g me-2" data-fa-transform="grow-8"></span> google</a></div>#}
+                        {#                  <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100" href="#"><span class="fab fa-facebook-square me-2" data-fa-transform="grow-8"></span> facebook</a></div>#}
+                        {#                </div>#}
                     </div>
                 </div>
             </div>

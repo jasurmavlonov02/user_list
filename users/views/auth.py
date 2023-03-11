@@ -5,8 +5,9 @@ from django.contrib.auth.views import LoginView
 
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.views.generic import FormView
 
-from users.forms import LoginForm
+from users.forms import LoginForm, RegisterForm
 from users.models import Profile
 
 
@@ -46,5 +47,16 @@ def logout_page(request):
     return render(request, 'auth/logout.html')
 
 
+class RegisterPage(FormView):
+    form_class = RegisterForm
+    success_url = reverse_lazy('login_page')
+    template_name = 'auth/register.html'
 
-#jasur
+    def form_valid(self, form):
+        form.save()
+        messages.add_message(
+            self.request,
+            level=messages.WARNING,
+            message='You are successfully registered '
+        )
+        return super().form_valid(form)

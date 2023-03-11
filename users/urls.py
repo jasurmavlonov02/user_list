@@ -1,6 +1,6 @@
 from django.urls import path
 
-from users.views.auth import logout_page, LoginPage
+from users.views.auth import logout_page, LoginPage , RegisterPage
 from users.views.views import user_list, user_details, user_add, user_delete, user_update
 
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('user-add/', user_add, name="user_add"),
 
     path('', LoginPage.as_view(), name="login_page"),
+    path('register-page/', RegisterPage.as_view(), name='register_page'),
     path('logout-page/', logout_page, name='logout_page'),
     path('category/<str:cats>/', user_list, name='category_by_slug'),
 
