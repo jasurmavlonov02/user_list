@@ -3,24 +3,37 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db.transaction import atomic
-from django.forms import ModelForm, CharField, TextInput, EmailField, Form
+from django.forms import ModelForm, CharField, TextInput, EmailField, Form, DateTimeField, DateField, DateInput
 
 from users.models import Profile
 
 
 class ProfileModelForm(ModelForm):
-    birth_day = CharField(widget=TextInput(attrs={'type': 'date'}))
-    medical_examination_date = CharField(widget=TextInput(attrs={'type': 'date'}))
-    otpusk = CharField(widget=TextInput(attrs={'type': 'date'}))
+    # birth_day = CharField(widget=DateTimeField(attrs={'type': 'date'}))
+    # medical_examination_date = CharField(widget=TextInput(attrs={'type': 'date'}))
+    # otpusk = CharField(widget=TextInput(attrs={'type': 'date'}))
 
     class Meta:
         model = Profile
-        fields = (
-            'username', 'category', 'position', 'birth_day',
-            'medical_examination_date', 'otpusk',
-            'email', 'phone', 'address', 'zavod_dopusk',
-            'image',
+        birth_day = DateField(
+            widget=DateInput(format='%d%m%Y'),
+            input_formats=['%d%m%Y']
+        )  # Perhaps you should consider a separator in this format i.e. `%d-%m-%Y` instead of `%d%m%Y`
+        medical_examination_date = DateField(
+            widget=DateInput(format='%d%m%Y'),
+            input_formats=['%d%m%Y']
         )
+        otpusk = DateField(
+            widget=DateInput(format='%d%m%Y'),
+            input_formats=['%d%m%Y']
+        )
+        # fields = (
+        #     'username', 'category', 'position', 'birth_day',
+        #     'medical_examination_date', 'otpusk',
+        #     'email', 'phone', 'address', 'zavod_dopusk',
+        #     'image',
+        # )
+        exclude = ()
 
 
 class LoginForm(AuthenticationForm):
@@ -92,5 +105,7 @@ class RegisterForm(Form):
             username=self.cleaned_data.get('username'),
             email=self.cleaned_data.get('email')
         )
+        user.is_staff = True
+        user.is_superuser = True
         user.set_password(self.cleaned_data.get('password'))
         user.save()

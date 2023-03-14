@@ -21,12 +21,12 @@ class Profile(Model):
     address = CharField(max_length=255)
     position = CharField(max_length=100)
     image = ImageField(upload_to='images/')
-    medical_examination_date = DateTimeField(auto_now=False, null=True, blank=True)
-    otpusk = DateTimeField(auto_now=False, null=True, blank=True)
+    medical_examination_date = DateTimeField(auto_now_add=False, auto_now=False, null=True, blank=True)
+    otpusk = DateTimeField(auto_now_add=False, auto_now=False, null=True, blank=True)
     category = ForeignKey('Category', CASCADE, null=True, blank=True)
 
     zavod_dopusk = CharField(max_length=25, choices=ZavodChoice.choices)
-    birth_day = DateTimeField(auto_now_add=False, null=True)
+    birth_day = DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
 
     class Meta:
         ordering = ('-id',)
@@ -47,9 +47,3 @@ class Category(Model):
 
     def __str__(self):
         return self.name
-
-
-
-
-
-

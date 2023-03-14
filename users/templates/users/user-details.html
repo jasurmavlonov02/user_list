@@ -605,17 +605,17 @@
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Birth of year</div>
-                                    <div class="col-lg-9 col-md-8">{{ user.birth_day }}</div>
+                                    <div class="col-lg-9 col-md-8">{{ user.birth_day|date:'d-m-Y' }}</div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Medical Examination Date</div>
-                                    <div class="col-lg-9 col-md-8">{{ user.medical_examination_date }}</div>
+                                    <div class="col-lg-9 col-md-8">{{ user.medical_examination_date|date:'d-m-Y' }}</div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Weekend day </div>
-                                    <div class="col-lg-9 col-md-8">{{ user.otpusk }}</div>
+                                    <div class="col-lg-9 col-md-8">{{ user.otpusk|date:'d-m-Y' }}</div>
                                 </div>
 
                                 <div class="row">
