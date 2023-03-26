@@ -49,4 +49,4 @@ class Category(Model):
         return self.name
 
 
-#akmal
+#akmaljon
