@@ -47,3 +47,6 @@ class Category(Model):
 
     def __str__(self):
         return self.name
+
+
+#akmal
