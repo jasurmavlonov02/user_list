@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from django.contrib.postgres.fields import ArrayField
 from django.core.validators import integer_validator
 from django.db.models import CharField, EmailField, ImageField, DateTimeField, TextChoices, Model, SlugField, \
     ForeignKey, CASCADE
@@ -10,11 +11,6 @@ from django.utils.text import slugify
 
 
 class Profile(Model):
-    class ZavodChoice(TextChoices):
-        NMZ = 'NMZ'
-        GMZ = 'GMZ'
-        SHMZ = 'SHMZ'
-
     username = CharField(max_length=100, unique=False)
     phone = CharField(max_length=9, validators=[integer_validator])
     email = EmailField(unique=True)
@@ -25,7 +21,7 @@ class Profile(Model):
     otpusk = DateTimeField(auto_now_add=False, auto_now=False, null=True, blank=True)
     category = ForeignKey('Category', CASCADE, null=True, blank=True)
 
-    zavod_dopusk = CharField(max_length=25, choices=ZavodChoice.choices)
+    zavod_dopusk = ArrayField(CharField(max_length=100), blank=True, default=list)
     birth_day = DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
 
     class Meta:
@@ -47,6 +43,3 @@ class Category(Model):
 
     def __str__(self):
         return self.name
-
-
-#che tam

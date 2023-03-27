@@ -1,17 +1,28 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
+from django.db.models import TextChoices
 from django.db.transaction import atomic
-from django.forms import ModelForm, CharField, TextInput, EmailField, Form, DateTimeField, DateField, DateInput
+from django.forms import ModelForm, CharField, TextInput, EmailField, Form, DateTimeField, DateField, DateInput, \
+    ImageField
 
 from users.models import Profile
 
 
 class ProfileModelForm(ModelForm):
-    # birth_day = CharField(widget=DateTimeField(attrs={'type': 'date'}))
-    # medical_examination_date = CharField(widget=TextInput(attrs={'type': 'date'}))
-    # otpusk = CharField(widget=TextInput(attrs={'type': 'date'}))
+    username = CharField(label='F.I.O')
+    phone = CharField(label='Telefon raqami', max_length=9)
+    email = EmailField(label="Elektron pochtasi")
+    address = CharField(label="Uy manzili")
+    position = CharField(label="Lavozimi")
+    image = ImageField(label="Rasmi")
+    medical_examination_date = DateTimeField(label="Tibbiy ko'rikdan o'tgan sanasi")
+    otpusk = DateTimeField(label="Ta'tilga chiqish sanasi")
+    #
+    zavod_dopusk = ArrayField(CharField(label="Zavodga kirish ruhsatnomasi"), blank=True, default=list)
+    birth_day = DateTimeField(label="Tug'ilgan kuni")
 
     class Meta:
         model = Profile
